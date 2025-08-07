@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Context Lookup AI",
+  "version": "0.1.0",
+  "description": "Right-click or hover to look up selected text with page context.",
+  "permissions": ["contextMenus", "storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>", "https://api.openai.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "Context Lookup AI" },
+  "options_page": "options.html",
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }]
+}
