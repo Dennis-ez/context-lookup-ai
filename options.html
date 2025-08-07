@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>Context Lookup AI — Options</title></head>
+  <body>
+    <h3>OpenAI API key</h3>
+    <input id="key" type="password" style="width: 420px;" placeholder="sk-..." />
+    <button id="save">Save</button>
+    <p>We store the key in your browser’s sync storage on this device only.</p>
+    <script>
+      (async () => {
+        const { openaiKey } = await chrome.storage.sync.get("openaiKey");
+        if (openaiKey) document.getElementById('key').value = openaiKey;
+      })();
+      document.getElementById('save').onclick = async () => {
+        await chrome.storage.sync.set({ openaiKey: document.getElementById('key').value.trim() });
+        alert("Saved");
+      };
+    </script>
+  </body>
+</html>
